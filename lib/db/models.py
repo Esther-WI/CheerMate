@@ -1,7 +1,12 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import declarative_base
 from datetime import datetime
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 
+engine= create_engine('sqlite:////home/user/Desktop/Phase_3-Project/CheerMate/lib/db/cheermate.db')
+Session= sessionmaker(bind=engine)
+session= Session()
 Base = declarative_base()
 
 class User(Base):
