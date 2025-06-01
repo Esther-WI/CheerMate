@@ -1,4 +1,4 @@
-from models import User, Mood , Activity, session
+from lib.db.models import User, Mood , Activity, session
 from datetime import datetime
 import random
 
