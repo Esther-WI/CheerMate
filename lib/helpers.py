@@ -1,5 +1,6 @@
 from lib.db.models import User, Mood , Activity, session
 from datetime import datetime
+from sqlalchemy import func
 import random
 
 
@@ -46,7 +47,7 @@ def welcome_user():
 
 
 def log_mood(user):
-    valid_feelings = ["happy", "sad", "anxious", "motivated", "frustrated"]
+    valid_feelings = ["Happy", "Sad", "Anxious", "Motivated", "Frustrated"]
     
     while True:
         feeling = input("How are you feeling today? (Happy/Sad/Anxious/Motivated/Frustrated): ").strip()
@@ -62,7 +63,8 @@ def log_mood(user):
 def suggest_activity(user):
     last_mood = session.query(Mood).filter_by(user_id=user.id).order_by(Mood.timestamp.desc()).first()
     if last_mood:
-        activities = session.query(Activity).filter_by(mood_trigger=last_mood.feeling).all()
+        print(f"DEBUG: Last mood = '{last_mood.feeling}'")
+        activities = session.query(Activity).filter(func.lower(Activity._mood_trigger) == last_mood.feeling.lower()).all()
         if activities:
             activity = random.choice(activities)
             print(f"\n* Suggested activity for your mood ({last_mood.feeling}): {activity.suggestion}")

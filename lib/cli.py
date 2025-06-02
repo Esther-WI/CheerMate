@@ -1,7 +1,7 @@
 from lib.db.models import Base, engine
 
 
-from helpers import (
+from lib.helpers import (
     welcome_user,
     log_mood,
     suggest_activity,

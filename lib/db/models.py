@@ -74,7 +74,7 @@ class Mood(Base):
     id = Column(Integer, primary_key=True)
     _feeling = Column("feeling", String, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=True)
 
     def __repr__(self):
         return f"<Mood(feeling='{self.feeling}', timestamp='{self.timestamp}')>"
@@ -119,7 +119,7 @@ class Activity(Base):
     id = Column(Integer, primary_key=True)
     _mood_trigger = Column("mood_trigger", String, nullable=False)
     suggestion = Column(String, nullable=False)
-    user_id =  Column(Integer, ForeignKey('users.id'))
+    user_id =  Column(Integer, ForeignKey('users.id'), nullable=True)
 
     def __repr__(self):
         return f"<Activity(mood_trigger='{self.mood_trigger}', suggestion='{self.suggestion}')>"
